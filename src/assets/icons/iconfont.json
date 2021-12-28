@@ -1,0 +1,16 @@
+{
+  "id": "3068320",
+  "name": "myResume",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5858607",
+      "name": "arrow_up_fill",
+      "font_class": "arrow_up_fill",
+      "unicode": "e817",
+      "unicode_decimal": 59415
+    }
+  ]
+}

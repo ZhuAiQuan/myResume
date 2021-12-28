@@ -30,9 +30,15 @@ const onTouchStart = (e: TouchEvent) => {
   moves.y = e.changedTouches[0].clientY
 }
 const onTouchEnd = e => {
+  const canGoNext = moves.y - moves.move >= document.body.offsetHeight * 0.1 || (moves.y - moves.move) * -1 > document.body.offsetHeight * 0.1;
   const state = moves.y - moves.move > 0;
   moves.y = 0;
+  if (!moves.move || !canGoNext) {
+    moves.move = 0;
+    return
+  }
   moves.move = 0;
+  
   if (state) {
     for(let i = 0; i < router.list.length; i++) {
       if (router.list[i].path === route.path && router.list[i+1]) {
@@ -52,18 +58,33 @@ const onTouchEnd = e => {
 const onTouchMove = (e: TouchEvent) => {
   moves.move = e.changedTouches[0].clientY;
 }
+const toFirstPage = () => {
+  routerVm.push('/')
+}
 const move = computed(() => {
   if (moves.move) {
     return `${moves.move - moves.y}px`
   } else return 0
+})
+const firstPage = computed(() => {
+  if (router.list.length && route.path === '/') return true
+  else return false
+})
+const lastPage = computed(() => {
+  return router.list.length && router.list[router.list.length - 1].path === route.path
 })
 </script>
 
 <template>
   <div id="container" @touchstart.stop="onTouchStart" @touchend.stop="onTouchEnd" @touchmove="onTouchMove" :style="{ top: `${move}` }" :class="{'move-class': moves.move}">
     <router-view></router-view>
-    <div class="next" v-if="browserRedirect()">
+    <div class="next" v-if="browserRedirect() && !lastPage">
       <img :src="fpage" alt="">
+    </div>
+    <div class="up" v-if="!firstPage" @click="toFirstPage">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-arrow_up_fill"></use>
+      </svg>
     </div>
   </div>
 </template>
@@ -73,7 +94,6 @@ const move = computed(() => {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background: violet;
   -webkit-overflow-scrolling: touch;
   .next {
     position: fixed;
@@ -87,6 +107,17 @@ const move = computed(() => {
     img {
       width: 20px;
     }
+  }
+  .up {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 30px;
   }
 }
 .move-class {
