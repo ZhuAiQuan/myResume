@@ -29,7 +29,7 @@ const routerVm = useRouter();
 const onTouchStart = (e: TouchEvent) => {
   moves.y = e.changedTouches[0].clientY
 }
-const onTouchEnd = e => {
+const onTouchEnd = () => {
   const canGoNext = moves.y - moves.move >= document.body.offsetHeight * 0.1 || (moves.y - moves.move) * -1 > document.body.offsetHeight * 0.1;
   const state = moves.y - moves.move > 0;
   moves.y = 0;
