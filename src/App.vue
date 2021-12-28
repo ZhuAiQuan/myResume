@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, computed } from 'vue';
-import { browserRedirect } from 'utils';
-import { routes } from 'router';
+import { browserRedirect } from '@/utils';
+import { routes } from '@/router';
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import fpage from 'assets/images/fpage_btn.png';
 
