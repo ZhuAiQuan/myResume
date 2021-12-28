@@ -2,7 +2,7 @@
  * @Description: xingp，yyds
  * @Author: zaq
  * @Date: 2021-12-28 13:59:04
- * @LastEditTime: 2021-12-28 15:46:05
+ * @LastEditTime: 2021-12-28 15:48:53
  * @LastEditors: zaq
  * @Reference: 
 -->
@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ZContent from '@/components/z-content'
+import ZContent from '@/components/z-content/index.vue'
 
 export default defineComponent({
   name: '',
