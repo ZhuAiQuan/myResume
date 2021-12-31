@@ -4,6 +4,7 @@ import { browserRedirect } from '@/utils';
 import { routes } from '@/router';
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import fpage from 'assets/images/fpage_btn.png';
+import axios from 'axios'
 
 interface RouterType {
   list: RouteRecordRaw[]
@@ -15,6 +16,7 @@ onMounted(() => {
   } else {
     // pc端 监听鼠标滚动事件
   }
+  axios.get('/api/api/bannarlist')
 })
 const moves = reactive({
   y: 0,

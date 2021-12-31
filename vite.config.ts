@@ -17,10 +17,20 @@ export default defineConfig({
       'utils': resolve('src/utils'),
       "views": resolve('src/views'),
       'router': resolve('src/router'),
-      'assets': resolve('src/assets')
+      'assets': resolve('src/assets'),
+      "types": resolve('src/types')
     }
   },
   define: {
     'process.env': {}
+  },
+  server: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:3300/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
